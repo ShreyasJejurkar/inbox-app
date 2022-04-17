@@ -45,15 +45,4 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapGet("/home/signout", async (httpContext) =>
-{
-    await httpContext.SignOutAsync(
-        CookieAuthenticationDefaults.AuthenticationScheme,
-        new AuthenticationProperties()
-        {
-            RedirectUri = "/"
-        }
-        );
-});
-
 app.Run();

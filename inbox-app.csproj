@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>inbox_app</RootNamespace>
+    <UserSecretsId>7d05bd09-63c7-48a9-a0e4-db377bf2cfea</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="6.0.5" />
+    <PackageReference Include="Octokit" Version="0.50.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,10 +1,13 @@
+using inbox_app.Options;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<AstraDbConnectOptions>(builder.Configuration.GetSection("AstraDbConnectOptions"));
+
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;

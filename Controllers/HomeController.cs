@@ -1,16 +1,20 @@
 ﻿using Cassandra;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using inbox_app.Options;
 
 namespace inbox_app.Controllers
 {
     public class HomeController : Controller
     {
-        private IWebHostEnvironment _webHostEnvironment;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly AstraDbConnectOptions _astraDbOptions;
 
-        public HomeController(IWebHostEnvironment webHostEnvironment)
+        public HomeController(IWebHostEnvironment webHostEnvironment, IOptionsSnapshot<AstraDbConnectOptions> astraDbOptions)
         {
             _webHostEnvironment = webHostEnvironment;
+            _astraDbOptions = astraDbOptions.Value;
         }
 
         [HttpGet]
@@ -56,7 +60,7 @@ namespace inbox_app.Controllers
 
             var cluster = Cluster.Builder()
                 .WithCloudSecureConnectionBundle(path)
-                .WithCredentials("NOpZWGaMNZLOQkzWLhGTBxMu", "Ov-lG08,Lz6Nlb1BK9,,XUut3p5GeQsmxCczRXaaavPJIfCJaiUcZ.Fd813DLZvYe4lbZgUPBcn14Y2RtOgh.oDl3uaFWTIbYFY0yhn_aQR7JMd3C5w0OPmfO8NvFayE")
+                .WithCredentials(_astraDbOptions.UserName, _astraDbOptions.Password)
                 .Build();
 
             var session = cluster.Connect("main");
